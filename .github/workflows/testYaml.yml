@@ -4,10 +4,12 @@ name: CI
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      key:
+        required: true
+        type: string
 
 jobs:
   build-html:
@@ -18,15 +20,11 @@ jobs:
 
       - name: Create directories
         run: |
-          mkdir test1
-          mkdir test2
-          mkdir test3
+          mkdir ${{ inputs.key }}
 
       - name: Create html files
         run: |
-          echo Hello world > test1/index.html
-          echo Another world > test2/index.html
-          echo Yet another world > test3/index.html
+          echo Hello hello world > ${{ inputs.key }}/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -34,7 +32,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./"
+          path: "./${{ inputs.key }}/"
 
   deploy-tests:
       runs-on: ubuntu-latest
