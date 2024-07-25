@@ -17,17 +17,21 @@ jobs:
 
       - name: Create directory
         run: |
-          mkdir -p reports/${{ inputs.key }}
+          echo Before
+          ls -la
+          mkdir ${{ inputs.key }}
+          echo AFTER
+          ls -la
 
       - name: Create html file
         run: |
-          echo Hello hello ${{ inputs.key }} world > reports/${{ inputs.key }}/index.html
+          echo Hello hello world > ${{ inputs.key }}/index.html
           echo AFTER FILE ADDED
           ls
-          ls  reports
+          ls -la ${{ inputs.key }}
   
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: test-${{ inputs.key }}
-          path: "./reports/"
+          path: "./${{ inputs.key }}"
