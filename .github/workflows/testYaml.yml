@@ -16,11 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create html
-        run: echo Hello world > test/index.html
-
-      - name: Create more html files
+      - name: Create directories
         run: |
+          mkdir test1
+          mkdir test2
+          mkdir test3
+
+      - name: Create html files
+        run: |
+          echo Hello world > test1/index.html
           echo Another world > test2/index.html
           echo Yet another world > test3/index.html
 
