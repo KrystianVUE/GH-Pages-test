@@ -4,7 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-all-e2e-tests:
+  run-many-deployments:
+    permissions:
+        pages: write
+        id-token: write
+        actions: read
+
     strategy:
       fail-fast: false
       matrix:
