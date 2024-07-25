@@ -1,10 +1,7 @@
 
-name: CI
+name: Single html generator
 
 on:
-  push:
-    branches: [ "master" ]
-
   workflow_call:
     inputs:
       key:
@@ -18,36 +15,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create directories
+      - name: Create directory
         run: |
           mkdir ${{ inputs.key }}
 
-      - name: Create html files
+      - name: Create html file
         run: |
           echo Hello hello world > ${{ inputs.key }}/index.html
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
   
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          path: "./${{ inputs.key }}/"
-
-  deploy-tests:
-      runs-on: ubuntu-latest
-      needs: build-html
-      
-      permissions:
-        pages: write
-        id-token: write
-        actions: read
-
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
-
-      steps:
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
+          name: test-${{ inputs.key }}
+          path: "./"

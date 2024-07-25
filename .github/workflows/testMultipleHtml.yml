@@ -21,3 +21,37 @@ jobs:
     with:
       key: ${{ matrix.specs.key }}
     secrets: inherit
+
+  deploy-tests:
+    runs-on: ubuntu-latest
+    needs: run-many-deployments
+    
+    permissions:
+      pages: write
+      id-token: write
+      actions: read
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Create report directory
+        run: mkdir reports
+
+      - name: Download all html files
+        uses: actions/download-artifact@v4
+        with:
+          path: "./reports"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./reports/"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
