@@ -17,18 +17,11 @@ jobs:
 
       - name: Create directory
         run: |
-          echo Before
-          ls -la
           mkdir ${{ inputs.key }}
-          echo AFTER
-          ls -la
 
       - name: Create html file
         run: |
-          echo Hello hello world > ${{ inputs.key }}/index.html
-          echo AFTER FILE ADDED
-          ls
-          ls -la ${{ inputs.key }}
+          echo Hello hello ${{ inputs.key }} world > ${{ inputs.key }}/index.html
   
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
