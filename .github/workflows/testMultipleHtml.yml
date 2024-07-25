@@ -1,4 +1,4 @@
-name: Vue e2e tests
+name: Parallel deploy test
 
 on:
   workflow_dispatch:
