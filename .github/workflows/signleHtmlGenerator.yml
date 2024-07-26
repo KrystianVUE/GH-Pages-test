@@ -21,7 +21,7 @@ jobs:
 
       - name: Create html file
         run: |
-          echo Hello hello ${{ inputs.key }} world > ${{ inputs.key }}/index.html
+          echo Hello ${{ inputs.key }} world OwO > ${{ inputs.key }}/index.html
   
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

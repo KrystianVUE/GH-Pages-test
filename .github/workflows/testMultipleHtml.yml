@@ -16,6 +16,7 @@ jobs:
         specs: [
           { key: 'desktop' },
           { key: 'mobile' },
+          { key: 'config' },
         ]
     uses: ./.github/workflows/signleHtmlGenerator.yml
     with:
