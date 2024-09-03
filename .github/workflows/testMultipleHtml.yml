@@ -11,6 +11,22 @@ on:
         description: "Mobile"
         required: true
         type: boolean
+      config:
+        description: "Configuration"
+        required: true
+        type: boolean
+      multiedit:
+        description: "Multi edit"
+        required: true
+        type: boolean
+      dict-desktop:
+        description: "Dictionary desktop"
+        required: true
+        type: boolean
+      dict-mobile:
+        description: "Dictionary mobile"
+        required: true
+        type: boolean
 
 jobs:
   determine-matrix:
@@ -23,10 +39,22 @@ jobs:
         run: |
           MATRIX="{\"specs\":["
           if [ "${{ github.event.inputs.desktop }}" == "true" ]; then
-            MATRIX+="{\"key\":\"desktop\"},"
+            MATRIX+="{\"key\":\"DESKTOP_MONSTER\"},"
           fi
           if [ "${{ github.event.inputs.mobile }}" == "true" ]; then
-            MATRIX+="{\"key\":\"mobile\"}"
+            MATRIX+="{\"key\":\"MOBILE_FRAJER\"},"
+          fi
+          if [ "${{ github.event.inputs.config }}" == "true" ]; then
+            MATRIX+="{\"key\":\"Is_this_configuration_WOW\"},"
+          fi
+          if [ "${{ github.event.inputs.multiedit }}" == "true" ]; then
+            MATRIX+="{\"key\":\"Multi_Culti\"},"
+          fi
+          if [ "${{ github.event.inputs.dict-desktop }}" == "true" ]; then
+            MATRIX+="{\"key\":\"Dicnasdjkhasdk_dekstop_ofc\"},"
+          fi
+          if [ "${{ github.event.inputs.dict-mobile }}" == "true" ]; then
+            MATRIX+="{\"key\":\"dict_MOBILE_HEHEHEHH\"},"
           fi
           MATRIX+="]}"
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
