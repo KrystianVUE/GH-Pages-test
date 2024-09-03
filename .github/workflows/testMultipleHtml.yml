@@ -23,7 +23,6 @@ jobs:
       fail-fast: false
       matrix:
         specs: [
-          { key: ${{ inputs.desktop }} ? 'desktop' : 'notdesktop' },
           { key: 'config' },
         ]
     uses: ./.github/workflows/signleHtmlGenerator.yml
