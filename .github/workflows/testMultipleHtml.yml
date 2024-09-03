@@ -23,8 +23,8 @@ jobs:
       fail-fast: false
       matrix:
         specs: [
-          { key: 'desktop' },
-          { key: 'mobile' },
+          { key: ${{ github.event.inputs.desktop }} },
+          { key: ${{ github.event.inputs.mobile }} },
           { key: 'config' },
         ]
     uses: ./.github/workflows/signleHtmlGenerator.yml
