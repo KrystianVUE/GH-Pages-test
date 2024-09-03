@@ -26,7 +26,7 @@ jobs:
             MATRIX+="{\"key\":\"desktop\"},"
           fi
           if [ "${{ github.event.inputs.mobile }}" == "true" ]; then
-            MATRIX+="{\"key\":\"mobile\"},"
+            MATRIX+="{\"key\":\"mobile\"}"
           fi
           MATRIX+="]}"
           echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        specs: ${{ fromJson(needs.determine-matrix.outputs.matrix) }}
+        specs: ${{ fromJson(needs.determine-matrix.outputs.matrix).specs }}
     uses: ./.github/workflows/signleHtmlGenerator.yml
     with:
       key: ${{ matrix.specs.key }}
