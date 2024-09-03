@@ -26,8 +26,6 @@ jobs:
           { key: 'desktop' },
           { key: 'mobile' },
           { key: 'config' },
-          { key: ${{ github.event.inputs.desktop }} === 'true' ? 'desktop2' : '' },
-          { key: ${{ github.event.inputs.mobile }} === 'true' ? 'mobile2' : '' },
         ]
     uses: ./.github/workflows/signleHtmlGenerator.yml
     with:
