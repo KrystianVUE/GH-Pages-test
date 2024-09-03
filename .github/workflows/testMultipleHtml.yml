@@ -13,7 +13,25 @@ on:
         type: boolean
 
 jobs:
+  determine-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Set matrix dynamically
+        id: set-matrix
+        run: |
+          MATRIX="{\"specs\":["
+          if [ "${{ github.event.inputs.desktop }}" == "true" ]; then
+            MATRIX+="{\"key\":\"desktop\"},"
+          fi
+          if [ "${{ github.event.inputs.mobile }}" == "true" ]; then
+            MATRIX+="{\"key\":\"mobile\"},"
+          fi
+          MATRIX+="]}"
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
   run-many-deployments:
+    needs: determine-matrix
     permissions:
         pages: write
         id-token: write
@@ -22,9 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        specs: [
-          { key: 'config' },
-        ]
+        specs: ${{ fromJson(needs.determine-matrix.outputs.matrix) }}
     uses: ./.github/workflows/signleHtmlGenerator.yml
     with:
       key: ${{ matrix.specs.key }}
