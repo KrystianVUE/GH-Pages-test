@@ -6,10 +6,10 @@ on:
       desktop:
         description: "Desktop?"
         required: true
-        defualt: 'aaa'
+        type: boolean
       mobile:
         description: "Mobile?"
-        required: true
+        required: false
         default: 'bbb'
 
 jobs:
