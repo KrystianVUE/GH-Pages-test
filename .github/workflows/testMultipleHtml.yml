@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       desktop:
-        description: "Desktop?"
+        description: "Desktop"
         required: true
         type: boolean
       mobile:
-        description: "Mobile?"
-        required: false
-        default: 'bbb'
+        description: "Mobile"
+        required: true
+        type: boolean
 
 jobs:
   run-many-deployments:
