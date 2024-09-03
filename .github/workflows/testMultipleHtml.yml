@@ -5,12 +5,12 @@ on:
     inputs:
       desktop:
         description: "Desktop?"
-        required: false
-        default: "false"
+        required: true
+        type: boolean
       mobile:
         description: "Mobile?"
-        required: false
-        default: "false"
+        required: true
+        type: boolean
 
 jobs:
   run-many-deployments:
@@ -23,8 +23,7 @@ jobs:
       fail-fast: false
       matrix:
         specs: [
-          { key: ${{ github.event.inputs.desktop }} },
-          { key: ${{ github.event.inputs.mobile }} },
+          { key: ${{ inputs.desktop }} ? 'desktop' : 'notdesktop' },
           { key: 'config' },
         ]
     uses: ./.github/workflows/signleHtmlGenerator.yml
