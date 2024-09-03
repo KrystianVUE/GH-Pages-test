@@ -6,9 +6,11 @@ on:
       desktop:
         description: "Desktop?"
         required: true
+        defualt: 'aaa'
       mobile:
         description: "Mobile?"
         required: true
+        default: 'bbb'
 
 jobs:
   run-many-deployments:
