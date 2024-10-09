@@ -1,0 +1,16 @@
+name: Run Pipeline on Folder Change
+
+on:
+  pull_request:
+    paths:
+      - 'site1/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Run your action
+        run: echo "Running pipeline as files in 'your-folder' were changed."
